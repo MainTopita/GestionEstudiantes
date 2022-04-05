@@ -1,0 +1,55 @@
+{% include 'header.html' %}
+<br/>
+<a href="{{ url_for('create')}}" class="btn btn-success">
+
+        Ingresar nuevo estudiante
+</a>
+<br>
+<br>
+
+
+    <h1> Estudiantes </h1>
+    <h5> Este programa indica que estudiantes son posibles desertores de la materia 
+        técnicas de programación. Se considera un posible desertor al estudiante que 
+        haya faltado a 10 (o más) clases
+    </h5>
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Faltas</th>
+                <th>Status</th>
+                <th>acciones</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for estudiante in estudiantes %}
+                
+            
+            <tr>
+                <td> {{estudiante[0]}} </td>
+
+                <td> 
+                    <img class="img-thumbnail" width="150" src="uploads/{{estudiante[3]}}" alt="">
+
+                    </td>
+
+                <td> {{estudiante[1]}}</td>
+                <td> {{estudiante[2]}}</td>
+                <td> {{estudiante[4]}}</td>
+                <td> {{"Es posible desertor" if estudiante[4] >= 10 else  "No es posible desertor"}} </td>
+
+                <td> <a class="btn btn-warning" href="/edit/{{estudiante[0]}}">Editar</a> |
+                    <a onclick="return confirm(' ¿Desea borrar este registro? ')" class="btn btn-danger" href="/destroy/{{estudiante[0]}}">Eliminar</a>
+                    
+                 </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% include 'footer.html' %} 

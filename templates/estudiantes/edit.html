@@ -1,0 +1,63 @@
+{% include 'header.html' %}
+
+{% for estudiante in estudiantes %}
+   
+{{estudiante[0] }}
+
+
+<form method="post" action="/update" enctype="multipart/form-data">
+
+    <div class="card">
+        <div class="card-header">
+            Editar estudiante
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"> Datos del estudiante </h5>
+            <p class="card-text">
+
+                <div class="form-group"> 
+                    <label for="txtNombre"> Nombre </label>
+                    <input id="txtNombre" value="{{estudiante[1] }}" class="form-control" type="text" name="txtNombre">
+                
+                </div>
+
+                <div class="form-group">
+                    <label for="txtCorreo"> Correo </label>
+                    <input id="txtCorreo" value="{{estudiante[2] }}" class="form-control" type="text" name="txtCorreo">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFoto"> Foto </label>
+
+                    <img class="img-thumbnail" width="300" src="{{ url_for('uploads', nombreFoto=estudiante[3]) }}" alt="">
+
+                    <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFaltas">Text</label>
+                    <input id="txtFaltas" value="{{estudiante[4] }}" class="form-control" type="text" name="txrFaltas">
+                </div>
+
+                Id:
+                <input type="hidden" value="{{estudiante[0] }}" name="txtID" id="txtID"> 
+                <br>
+                <br>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Actualizar">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary"> Regresar </a>
+                </div>
+
+            
+
+        </div>
+    </div>
+
+    
+
+   
+</form>
+
+{% endfor %}
+{% include 'footer.html' %} 
